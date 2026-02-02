@@ -30,12 +30,12 @@ export async function POST(request: Request) {
     }
 
     // Perform AI analysis
-    const analysis = await analyzeEvent(
-      event.title,
-      event.description,
-      event.marketProb,
-      event.category
-    )
+    const analysis = await analyzeEvent({
+      title: event.title,
+      description: event.description,
+      marketProb: event.marketProb,
+      category: event.category
+    })
 
     // Update event with analysis
     const updatedEvent = await prisma.event.update({
@@ -103,12 +103,12 @@ export async function PUT(request: Request) {
 
     for (const event of events) {
       try {
-        const analysis = await analyzeEvent(
-          event.title,
-          event.description,
-          event.marketProb,
-          event.category
-        )
+        const analysis = await analyzeEvent({
+          title: event.title,
+          description: event.description,
+          marketProb: event.marketProb,
+          category: event.category
+        })
 
         await prisma.event.update({
           where: { id: event.id },
